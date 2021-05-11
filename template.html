@@ -12,6 +12,8 @@
   </head>
   <body>
     <h1>LTK Google Vision</h1>
+    {% for category in categories %}
+    <h3>Category: {{category["name"]}}</h3>
     <table data-toggle="table">
       <thead>
         <tr>
@@ -21,24 +23,22 @@
         </tr>
       </thead>
       <tbody>
-        {% for category in categories %}
-            <tr><td>{{category["name"]}}</td></tr>
-            {% for categoryltk in category["ltks"] %}
-            <tr>
-                <td><img src={{categoryltk["image_url"]}}></td>
-                <td>
-                  <ul class="list-group">
-                  {% for score in categoryltk.scores %}
-                    <li class="list-group-item">{{score}}</li>
-                  {% endfor %}
-                  </ul>
-                </td>
-                <td><a href="{{categoryltk["url"]}}" target="_blank">{{categoryltk["url"]}}</a></td>
-            </tr>
-            {% endfor %}
+        {% for categoryltk in category["ltks"] %}
+        <tr>
+            <td><img src={{categoryltk["image_url"]}}></td>
+            <td>
+              <ul class="list-group">
+              {% for score in categoryltk.scores %}
+                <li class="list-group-item">{{score}}</li>
+              {% endfor %}
+              </ul>
+            </td>
+            <td><a href="{{categoryltk["url"]}}" target="_blank">{{categoryltk["url"]}}</a></td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
+    {% endfor %}
 
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
